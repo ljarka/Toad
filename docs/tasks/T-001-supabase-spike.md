@@ -1,6 +1,6 @@
 # T-001 — Supabase + Android SDK integration spike
 
-**Status:** done (`e75e1c7`)  
+**Status:** done (`94e42af`)  
 **Phase:** Etap 0  
 **Depends on:** —
 

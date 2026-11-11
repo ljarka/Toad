@@ -1,6 +1,6 @@
 # T-004 — Repo structure, CI, Supabase schema migrations
 
-**Status:** done (`4b862f9`)  
+**Status:** done (`974fc85`)  
 **Phase:** Etap 1  
 **Depends on:** T-001, T-002, T-003
 

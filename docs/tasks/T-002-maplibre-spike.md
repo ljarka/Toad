@@ -1,7 +1,7 @@
 # T-002 — MapLibre + GPS track recording spike
 
 **Status:** done
-**Commit:** cd688ba  
+**Commit:** `cd688ba` — spike on an abandoned pre-skeleton branch (not in `main`); spike code was throwaway by design, findings live in this file  
 **Phase:** Etap 0  
 **Depends on:** —
 

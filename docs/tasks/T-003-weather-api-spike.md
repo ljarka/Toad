@@ -1,6 +1,6 @@
 # T-003 — Open-Meteo weather API spike
 
-**Status:** done (`4b862f9`)  
+**Status:** done (`974fc85`)  
 **Phase:** Etap 0  
 **Depends on:** —
 

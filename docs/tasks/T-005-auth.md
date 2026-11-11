@@ -1,6 +1,6 @@
 # T-005 — Auth: login, register, profile
 
-**Status:** done (`9ad8f0f`)  
+**Status:** done (`71170f2`)  
 **Phase:** Etap 2  
 **Depends on:** T-004
 
