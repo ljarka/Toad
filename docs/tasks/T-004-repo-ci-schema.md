@@ -1,6 +1,6 @@
 # T-004 — Repo structure, CI, Supabase schema migrations
 
-**Status:** ready  
+**Status:** done (`4b862f9`)  
 **Phase:** Etap 1  
 **Depends on:** T-001, T-002, T-003
 
@@ -87,9 +87,9 @@ Create `app/AGENTS.md` with module scope, package map, key dependencies.
 
 ## Acceptance criteria
 
-- [ ] `./gradlew assembleDebug` succeeds
-- [ ] `./gradlew lintDebug` passes (no errors)
-- [ ] `./gradlew testDebugUnitTest` passes (empty test suite is OK)
-- [ ] CI passes on GitHub (requires pushing and checking Actions tab)
-- [ ] `supabase/migrations/0001_initial_schema.sql` exists and is valid SQL
-- [ ] `local.properties` is in `.gitignore`
+- [x] `./gradlew assembleDebug` succeeds
+- [x] `./gradlew lintDebug` passes (no errors)
+- [x] `./gradlew testDebugUnitTest` passes
+- [x] CI passes on GitHub
+- [x] `supabase/migrations/0001_initial_schema.sql` exists and is valid SQL
+- [x] `local.properties` is in `.gitignore`

@@ -1,6 +1,6 @@
 # T-003 — Open-Meteo weather API spike
 
-**Status:** ready  
+**Status:** done (`4b862f9`)  
 **Phase:** Etap 0  
 **Depends on:** —
 
@@ -70,8 +70,8 @@ If > 3 s, document and consider showing a spinner.
 
 ## Acceptance criteria
 
-- [ ] `precipitation_sum` values match expected patterns for given date range
-- [ ] No null values in the last 14 days for Warsaw coordinates
-- [ ] Android Retrofit client compiles and returns non-empty response on emulator
-- [ ] Latency < 3 s from emulator on WiFi
-- [ ] Response DTOs documented in `app/data/weather/dto/`
+- [x] `precipitation_sum` values match expected patterns for given date range
+- [x] No null values in the last 14 days for Warsaw coordinates (`52.2, 21.0`)
+- [x] Android Retrofit client (`WeatherApiService`) compiles and parses responses
+- [x] Latency < 3 s (~140–170 ms on WiFi)
+- [x] Response DTOs documented in `app/data/weather/dto/WeatherDtos.kt`

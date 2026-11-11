@@ -15,8 +15,8 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 |---|---|---|---|
 | [T-001](T-001-supabase-spike.md) | Supabase + Android SDK integration spike | `ready` | Etap 0 |
 | [T-002](T-002-maplibre-spike.md) | MapLibre + GPS track recording spike | `done` | Etap 0 |
-| [T-003](T-003-weather-api-spike.md) | Open-Meteo weather API spike | `ready` | Etap 0 |
-| [T-004](T-004-repo-ci-schema.md) | Repo structure, CI, Supabase schema (app skeleton + CI done; migrations, app/AGENTS.md left) | `in-progress` | Etap 1 |
+| [T-003](T-003-weather-api-spike.md) | Open-Meteo weather API spike | `done` (`4b862f9`) | Etap 0 |
+| [T-004](T-004-repo-ci-schema.md) | Repo structure, CI, Supabase schema | `done` (`4b862f9`) | Etap 1 |
 | [T-005](T-005-auth.md) | Auth: login, register, profile | `ready` | Etap 2 |
 | [T-006](T-006-species-db.md) | Species database (Room + seed data) | `ready` | Etap 3 |
 | [T-007](T-007-species-guide.md) | Species guide screen | `ready` | Etap 3 |
@@ -30,18 +30,18 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | [T-015](T-015-trip-photos.md) | Trip: attach photos to route | `ready` | Etap 7 |
 | [T-016](T-016-trip-history.md) | Trip history list + detail | `ready` | Etap 7 |
 | [T-017](T-017-trip-planning-ux.md) | Trip planning UX (pre-trip route sketch) | `draft` | Etap 7 |
-| [T-018](T-018-release.md) | Release: signing + Obtainium (workflow done; keystore secrets + first tag left) | `in-progress` | Etap 8 |
+| [T-018](T-018-release.md) | Release: signing + Obtainium | `done` (`00baedd`, `v0.1.0`) | Etap 8 |
 
 ## Roadmap
 
 | Etap | Description | Done |
 |---|---|---|
-| Etap 0 — Tech spikes | Supabase, MapLibre, weather API | 1/3 |
-| Etap 1 — Foundation | Repo structure, CI, Supabase schema | 0/1 |
+| Etap 0 — Tech spikes | Supabase, MapLibre, weather API | 2/3 |
+| Etap 1 — Foundation | Repo structure, CI, Supabase schema | 1/1 |
 | Etap 2 — Auth | Login, register, profile | 0/1 |
 | Etap 3 — Species | Catalog, species guide screen | 0/2 |
 | Etap 4 — Home feed | Season info, community photos | 0/1 |
 | Etap 5 — Photo sharing | Upload + GPS, community map | 0/2 |
 | Etap 6 — Probability | Algorithm + display | 0/2 |
 | Etap 7 — Trip | Route, car, photos, history | 0/5 |
-| Etap 8 — Release | Signing, distribution | 0/1 |
+| Etap 8 — Release | Signing, distribution | 1/1 |

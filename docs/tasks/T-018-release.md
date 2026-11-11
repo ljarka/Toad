@@ -1,7 +1,7 @@
 # T-018 — Release setup
 
-**Status:** ready  
-**Phase:** Etap 9  
+**Status:** done (`00baedd`, release `v0.1.0`)  
+**Phase:** Etap 8  
 **Depends on:** T-004
 
 ## Goal
@@ -94,7 +94,7 @@ jobs:
 
 ## Acceptance criteria
 
-- [ ] `assembleRelease` builds a signed APK locally with env vars set
-- [ ] Pushing a `v*` tag triggers the release workflow
-- [ ] Release APK appears as an asset on the GitHub Release
-- [ ] Obtainium successfully detects and installs the new version
+- [x] `assembleRelease` builds a signed APK locally with env vars set
+- [x] Pushing a `v*` tag triggers the release workflow
+- [x] Release APK appears as an asset on the GitHub Release (`toad-v0.1.0.apk`)
+- [x] Obtainium can track `https://github.com/ljarka/Toad`

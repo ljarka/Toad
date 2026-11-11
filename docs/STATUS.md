@@ -1,15 +1,15 @@
 # Toad — Project Status
 
-_Last updated: 2026-11-10_
+_Last updated: 2026-11-11_
 
 ## Task Queue
 
 | ID | Title | Status | Phase |
 |---|---|---|---|
 | T-001 | Supabase spike | ready | Etap 1 |
-| T-002 | MapLibre spike | ready | Etap 1 |
-| T-003 | Open-Meteo API spike | ready | Etap 1 |
-| T-004 | Repo, CI, DB schema | ready | Etap 2 |
+| T-002 | MapLibre spike | done | Etap 1 |
+| T-003 | Open-Meteo API spike | done | Etap 1 |
+| T-004 | Repo, CI, DB schema | done | Etap 2 |
 | T-005 | Auth (login/register/profile) | ready | Etap 3 |
 | T-006 | Species database (Room + FTS4) | ready | Etap 3 |
 | T-007 | Species guide screen | ready | Etap 4 |
@@ -23,7 +23,7 @@ _Last updated: 2026-11-10_
 | T-015 | Trip photos attached to route | ready | Etap 7 |
 | T-016 | Trip history list + detail | ready | Etap 7 |
 | T-017 | Trip planning (pre-trip sketch) | draft | Etap 8 |
-| T-018 | Release setup | ready | Etap 9 |
+| T-018 | Release setup | done (`00baedd`, `v0.1.0`) | Etap 9 |
 
 ## Roadmap
 

@@ -21,70 +21,48 @@ Toad łączy społeczność grzybiarzy w jednym miejscu:
 
 ## Architecture
 
-Monorepo: Android app + Ktor backend w jednym repozytorium.
+Single-module Android app (`app/`) backed by **Supabase** ([ADR 0001](docs/decisions/0001-backend-supabase.md)), **MapLibre + OSM** ([ADR 0002](docs/decisions/0002-maps-maplibre.md)), and **Open-Meteo** ([ADR 0003](docs/decisions/0003-weather-open-meteo.md)):
 
 ```
-app/                    Android entry point
-feature/
-  home/                 Ekran główny (sezony + feed)
-  auth/                 Logowanie / rejestracja
-  map/                  Mapa społeczności
-  trip/                 Planowanie i historia tras
-  gallery/              Zdjęcia, upload, udostępnianie
-  profile/              Profil, statystyki
-core/
-  model/                Wspólne modele danych
-  network/              API client (Retrofit/Ktor)
-  database/             Room (trasy offline)
-  location/             GPS, geofencing
-  ui/                   Design system, komponenty
-server/                 Ktor backend
-  src/
-    mushrooms/          Baza gatunków, sezonowość
-    photos/             Upload, storage, feed
-    trips/              Trasy użytkowników
-    weather/            Open-Meteo proxy + probability
-    auth/               JWT / Firebase token verify
+app/src/main/java/com/github/ljarka/toad/
+  ToadApp.kt                  Hilt entry point (@HiltAndroidApp)
+  MainActivity.kt             Compose host (@AndroidEntryPoint)
+  ui/
+    auth/                     Logowanie, rejestracja, profil (Supabase Auth)
+    feed/                     Ekran główny: grzyby w sezonie + zdjęcia społeczności
+    map/                      Mapa społeczności + nakładka prawdopodobieństwa (MapLibre)
+    trip/                     Nagrywanie trasy GPS, marker auta, zdjęcia z trasy
+    history/                  Historia nagranych wypraw
+    species/                  Atlas gatunków grzybów offline (Room + FTS4)
+  data/
+    supabase/                 Klient Supabase (Auth, Postgrest, Storage, Realtime)
+    weather/                  Klient Open-Meteo (v1/archive + v1/forecast) i cache
+    probability/              Silnik prawdopodobieństwa występowania grzybów (na urządzeniu)
+supabase/
+  migrations/
+    0001_initial_schema.sql   Schemat PostgreSQL/PostGIS, tabele, indeksy GiST i polityki RLS
 ```
 
-## Roadmap
+## Supabase setup
 
-### Etap 1 — Fundament
-- [ ] T-001 Gradle multi-module, CI/CD, podpisywanie APK
-- [ ] T-002 Backend: Ktor + PostgreSQL + Docker
-- [ ] T-003 Autentykacja: Firebase Auth (Android + backend verify)
-
-### Etap 2 — Dane
-- [ ] T-004 Baza gatunków grzybów (PL, sezonowość, opisy)
-- [ ] T-005 Ekran główny: grzyby w sezonie + feed społeczności
-
-### Etap 3 — Mapa i zdjęcia
-- [ ] T-006 Zdjęcia z lokalizacją: kamera, upload, feed
-- [ ] T-007 Mapa społeczności: zdjęcia na MapLibre
-
-### Etap 4 — Planowanie tras
-- [ ] T-008 Planowanie trasy: rysowanie, waypoints, zdjęcia
-- [ ] T-009 Marker parkingu: zapamiętaj gdzie stoi auto
-
-### Etap 5 — Inteligencja
-- [ ] T-010 Prawdopodobieństwo grzybów: Open-Meteo + algorytm + heatmapa
-
-### Etap 6 — Dopracowanie
-- [ ] T-011 Historia tras: lista, replay, zdjęcia
-- [ ] T-012 Profil użytkownika: zdjęcia, statystyki, odznaki
-- [ ] T-013 Powiadomienia: nowe zdjęcia w pobliżu, alerty pogodowe
+1. Utwórz projekt na [supabase.com](https://supabase.com) (darmowy plan).
+2. Wgraj schemat bazy danych z [`supabase/migrations/0001_initial_schema.sql`](supabase/migrations/0001_initial_schema.sql):
+   - przez **Supabase CLI**: `supabase db push`, albo
+   - wklejając zawartość pliku w **SQL Editor** w panelu Supabase.
+3. Dodaj dane dostępowe projektu do `local.properties` (plik ignorowany przez Git):
+   ```properties
+   supabase.url=https://twoj-projekt.supabase.co
+   supabase.anon_key=eyJ...
+   ```
 
 ## Quick start
 
 ```bash
-# Backend (Docker)
-cd server && docker compose up -d
-
-# Android
-./gradlew :app:installDebug
-
-# Verify
+# Weryfikacja (lint + testy jednostkowe + testy screenshotów Paparazzi + assembleDebug)
 ./scripts/verify.sh
+
+# Instalacja na podłączonym telefonie / emulatorze
+./gradlew :app:installDebug
 ```
 
 ## Documentation
