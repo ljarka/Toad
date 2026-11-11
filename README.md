@@ -93,3 +93,23 @@ cd server && docker compose up -d
 - [docs/tasks/](docs/tasks/README.md) — kolejka zadań
 - [docs/decisions/](docs/decisions/README.md) — decyzje architektoniczne (ADR)
 - [docs/history.md](docs/history.md) — co było robione
+
+## Releasing (Obtainium)
+
+Push a version tag; the [release workflow](.github/workflows/release.yml) builds a signed APK and publishes it as a GitHub release:
+
+```bash
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+One-time setup: create a signing key and store it as repository secrets. **Keep the keystore and passwords safe**: updates must be signed with the same key.
+
+```bash
+keytool -genkeypair -keystore ~/toad-release.jks -alias toad -keyalg RSA -keysize 4096 -validity 10000
+gh secret set TOAD_KEYSTORE_BASE64 < <(base64 -i ~/toad-release.jks)
+gh secret set TOAD_KEYSTORE_PASSWORD
+gh secret set TOAD_KEY_ALIAS --body toad
+gh secret set TOAD_KEY_PASSWORD
+```
+
+In Obtainium: Add app → `https://github.com/ljarka/Toad`.

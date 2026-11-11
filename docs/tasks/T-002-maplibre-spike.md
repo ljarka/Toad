@@ -1,6 +1,7 @@
 # T-002 — MapLibre + GPS track recording spike
 
-**Status:** ready  
+**Status:** done
+**Commit:** cd688ba  
 **Phase:** Etap 0  
 **Depends on:** —
 
@@ -64,13 +65,13 @@ AndroidView(factory = { ctx ->
 
 ## Acceptance criteria
 
-- [ ] OSM tiles render correctly on emulator
-- [ ] User location component shows blue dot with accuracy circle
-- [ ] GPS track draws as a polyline in real time
-- [ ] Car marker placed on long-press; removable
-- [ ] Photo clusters merge at low zoom, expand at high zoom
-- [ ] Attribution "© OpenStreetMap contributors" visible
-- [ ] Delete `SpikeMapScreen.kt` before marking done
+- [x] OSM tiles render correctly on emulator
+- [x] User location component shows blue dot with accuracy circle
+- [x] GPS track draws as a polyline in real time
+- [x] Car marker placed on long-press; removable
+- [x] Photo clusters merge at low zoom, expand at high zoom
+- [x] Attribution "© OpenStreetMap contributors" visible
+- [x] Delete `SpikeMapScreen.kt` before marking done
 
 ## Notes for implementing agent
 

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Toad</string>
+    <string name="home_coming_soon">Grzybobranie już wkrótce: przewodnik po gatunkach, mapa znalezisk i prognoza wysypu.</string>
+    <string name="home_version">Wersja %1$s</string>
+</resources>
