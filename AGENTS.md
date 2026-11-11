@@ -37,7 +37,7 @@ Do not load the whole project. `AGENTS.md` tells you what to read.
 | `app/ui/trip/` | Trip planning, route recording, car marker, photo placement | todo |
 | `app/ui/history/` | Past trips list + detail | todo |
 | `app/ui/species/` | Species guide + detail | todo |
-| `app/data/supabase/` | Supabase client: auth, database, storage, realtime | todo |
+| `app/data/supabase/` | Supabase client: auth, database, storage, realtime | in-progress (SDK + Hilt module done) |
 | `app/data/weather/` | Open-Meteo API client + local cache | in-progress (API client done) |
 | `app/data/probability/` | Mushroom occurrence probability engine | todo |
 

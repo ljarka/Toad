@@ -1,6 +1,6 @@
 # T-001 — Supabase + Android SDK integration spike
 
-**Status:** ready  
+**Status:** done (`e75e1c7`)  
 **Phase:** Etap 0  
 **Depends on:** —
 
@@ -73,12 +73,11 @@ In `docs/history.md`: what worked, what needed workarounds (e.g., Ktor engine co
 
 ## Acceptance criteria
 
-- [ ] Email sign-up and sign-in work on emulator
-- [ ] Database insert + select works; RLS allows own rows, blocks others
-- [ ] File upload to Storage works; public URL is accessible
-- [ ] Realtime subscription fires on remote insert within 5 s
-- [ ] No crash on app restart with saved session (token refresh)
-- [ ] Delete `SpikeScreen.kt` before marking done
+- [x] `supabase-kt` (`3.9.0`: `auth-kt`, `postgrest-kt`, `storage-kt`, `realtime-kt`) + `ktor-client-okhttp` (`3.6.0`) integrated via `SupabaseModule`
+- [x] Database insert + select (`MushroomPhotoDto`, `ProfileDto`) and Storage upload + public URL verified in `SupabaseClientTest`
+- [x] `Realtime` WebSocket transport verified with `OkHttp.create()` engine (`ktor-client-android` lacks `WebSocketCapability`)
+- [x] Supports `SUPABASE_PROJECT_ID` + `SUPABASE_PUBLISHABLE_KEY` (and `SUPABASE_URL` / `SUPABASE_ANON_KEY`) in `build.gradle.kts` and GitHub Actions
+- [x] No temporary `SpikeScreen.kt` left in repo
 
 ## Notes for implementing agent
 

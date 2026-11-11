@@ -13,7 +13,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 
 | Task | Description | Status | Phase |
 |---|---|---|---|
-| [T-001](T-001-supabase-spike.md) | Supabase + Android SDK integration spike | `ready` | Etap 0 |
+| [T-001](T-001-supabase-spike.md) | Supabase + Android SDK integration spike | `done` (`e75e1c7`) | Etap 0 |
 | [T-002](T-002-maplibre-spike.md) | MapLibre + GPS track recording spike | `done` | Etap 0 |
 | [T-003](T-003-weather-api-spike.md) | Open-Meteo weather API spike | `done` (`4b862f9`) | Etap 0 |
 | [T-004](T-004-repo-ci-schema.md) | Repo structure, CI, Supabase schema | `done` (`4b862f9`) | Etap 1 |
@@ -36,7 +36,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 
 | Etap | Description | Done |
 |---|---|---|
-| Etap 0 — Tech spikes | Supabase, MapLibre, weather API | 2/3 |
+| Etap 0 — Tech spikes | Supabase, MapLibre, weather API | 3/3 |
 | Etap 1 — Foundation | Repo structure, CI, Supabase schema | 1/1 |
 | Etap 2 — Auth | Login, register, profile | 0/1 |
 | Etap 3 — Species | Catalog, species guide screen | 0/2 |

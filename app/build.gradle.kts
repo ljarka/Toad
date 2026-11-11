@@ -14,7 +14,16 @@ val localProps = Properties().apply {
     rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use(::load)
 }
 fun secret(prop: String, env: String, default: String): String =
-    localProps.getProperty(prop) ?: System.getenv(env) ?: default
+    localProps.getProperty(prop)?.takeIf { it.isNotBlank() }
+        ?: System.getenv(env)?.takeIf { it.isNotBlank() }
+        ?: default
+
+val supabaseProjectId = secret("supabase.project_id", "SUPABASE_PROJECT_ID", "")
+val defaultSupabaseUrl = if (supabaseProjectId.isNotEmpty()) {
+    "https://$supabaseProjectId.supabase.co"
+} else {
+    "https://placeholder.supabase.co"
+}
 
 android {
     namespace = "com.github.ljarka.toad"
@@ -29,8 +38,13 @@ android {
         versionCode = System.getenv("TOAD_VERSION_CODE")?.toInt() ?: 1
         versionName = System.getenv("TOAD_VERSION_NAME") ?: "dev"
 
-        buildConfigField("String", "SUPABASE_URL", "\"${secret("supabase.url", "SUPABASE_URL", "https://placeholder.supabase.co")}\"")
-        buildConfigField("String", "SUPABASE_ANON_KEY", "\"${secret("supabase.anon_key", "SUPABASE_ANON_KEY", "placeholder")}\"")
+        val supabaseKey = secret(
+            "supabase.publishable_key",
+            "SUPABASE_PUBLISHABLE_KEY",
+            secret("supabase.anon_key", "SUPABASE_ANON_KEY", "placeholder"),
+        )
+        buildConfigField("String", "SUPABASE_URL", "\"${secret("supabase.url", "SUPABASE_URL", defaultSupabaseUrl)}\"")
+        buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseKey\"")
     }
 
     // Release signing comes from the environment (GitHub secrets in the release
@@ -82,7 +96,13 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.kotlinx.serialization)
     implementation(libs.okhttp)
+    implementation(libs.supabase.postgrest)
+    implementation(libs.supabase.auth)
+    implementation(libs.supabase.storage)
+    implementation(libs.supabase.realtime)
+    implementation(libs.ktor.client.okhttp)
     testImplementation(libs.junit)
+    testImplementation(libs.ktor.client.mock)
     debugImplementation(libs.androidx.ui.tooling)
 }
 

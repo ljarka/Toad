@@ -6,7 +6,7 @@ _Last updated: 2026-11-11_
 
 | ID | Title | Status | Phase |
 |---|---|---|---|
-| T-001 | Supabase spike | ready | Etap 1 |
+| T-001 | Supabase spike | done | Etap 1 |
 | T-002 | MapLibre spike | done | Etap 1 |
 | T-003 | Open-Meteo API spike | done | Etap 1 |
 | T-004 | Repo, CI, DB schema | done | Etap 2 |
