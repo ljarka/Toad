@@ -16,13 +16,32 @@ Session persists across app restarts.
 - `RegisterScreen` — email + password + username + "Create account" button
 - `ProfileScreen` — avatar, username, trip count, photo count; "Sign out" button
 
+### Access model
+
+**Public (no login required):**
+- Home feed — viewing community photos
+- Community photo map — browsing photos on the map
+- Species guide — reading species descriptions
+- Mushroom probability screen — viewing forecasts
+
+**Requires login:**
+- Uploading a photo (T-009)
+- Recording a trip (T-013, T-014, T-015, T-016)
+- Viewing own profile
+
+The app opens directly to the feed/map. The login screen is reachable via a “Sign in” button in the top bar or triggered automatically when the user taps an action that requires auth.
+
 ### Navigation
 `AuthGraph` → `LoginScreen` ↔ `RegisterScreen`
-`AppGraph` (authenticated) → `FeedScreen`, ..., `ProfileScreen`
+`AppGraph` → `FeedScreen`, `MapScreen`, ..., `ProfileScreen` (accessible without login)
 
-`MainActivity.kt`: on launch, check `supabase.auth.currentUserOrNull()`:
-- null → navigate to `AuthGraph`
-- not null → navigate to `AppGraph`
+`MainActivity.kt`: always navigate to `AppGraph` on launch. Auth state is observed via
+`supabase.auth.sessionStatus` Flow — UI elements that require login are conditionally
+enabled or hidden based on the current session.
+
+When an unauthenticated user triggers an auth-gated action (e.g. upload photo), navigate
+to `LoginScreen` with a `returnRoute` argument so the app returns to the right place
+after successful login.
 
 ### New files
 - `ui/auth/LoginScreen.kt`
@@ -65,6 +84,15 @@ Add this SQL to `supabase/migrations/0002_auth_trigger.sql`.
 
 ## Acceptance criteria
 
+### Browse-first (new requirement)
+- [ ] App opens to home feed without requiring login
+- [ ] Community map and species guide are accessible without login
+- [ ] “Sign in” entry point visible in the top bar for unauthenticated users
+- [ ] Tapping an auth-gated action (e.g. upload photo) navigates to `LoginScreen` with `returnRoute`
+- [ ] After successful login, app navigates back to `returnRoute`
+- [ ] “Sign out” navigates back to feed (not to login screen)
+
+### Auth basics (done)
 - [x] User can register with email + password + username
 - [x] User can log in and is redirected to home feed
 - [x] Session persists across app kill/restart (via `supabase.auth.sessionStatus`)

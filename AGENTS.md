@@ -49,7 +49,8 @@ Do not load the whole project. `AGENTS.md` tells you what to read.
 4. **Photos stored in Supabase Storage** — never in Firestore or as Base64 in the database ([0005](docs/decisions/0005-photo-storage.md)).
 5. **Probability calculated on device** — weather data fetched per-location, algorithm runs client-side ([0006](docs/decisions/0006-probability-algorithm.md)).
 6. **GPS track recording only while trip is active** — never background location; WorkManager not used for location ([0004](docs/decisions/0004-species-database.md)).
-7. Changing an accepted decision = new ADR that supersedes it.
+7. **Browse-first, login-on-demand** — the app opens without requiring login. Viewing photos, the community map, the species guide, and probability screens is public. Login is required only for write actions: uploading photos, recording trips. When an unauthenticated user triggers an auth-gated action, navigate to `LoginScreen` with a `returnRoute` and return there after login. See [T-005](docs/tasks/T-005-auth.md).
+8. Changing an accepted decision = new ADR that supersedes it.
 
 ## Definition of Done (every task)
 
