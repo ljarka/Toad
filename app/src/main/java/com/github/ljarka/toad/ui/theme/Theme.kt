@@ -14,11 +14,15 @@ private val CapTan = Color(0xFFE0B98A)
 
 private val LightColors = lightColorScheme(
     primary = ForestGreen,
+    primaryContainer = Color(0xFFD6EAD8),
+    onPrimaryContainer = Color(0xFF13331B),
     secondary = CapBrown,
 )
 
 private val DarkColors = darkColorScheme(
     primary = MossGreen,
+    primaryContainer = Color(0xFF21452A),
+    onPrimaryContainer = Color(0xFFD6EAD8),
     secondary = CapTan,
 )
 

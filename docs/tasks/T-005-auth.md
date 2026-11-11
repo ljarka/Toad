@@ -1,6 +1,6 @@
 # T-005 — Auth: login, register, profile
 
-**Status:** ready  
+**Status:** done (`9ad8f0f`)  
 **Phase:** Etap 2  
 **Depends on:** T-004
 
@@ -65,14 +65,14 @@ Add this SQL to `supabase/migrations/0002_auth_trigger.sql`.
 
 ## Acceptance criteria
 
-- [ ] User can register with email + password + username
-- [ ] User can log in and is redirected to home feed
-- [ ] Session persists across app kill/restart (no re-login required)
-- [ ] "Sign out" clears session and navigates to login
-- [ ] Profile screen shows username and email
-- [ ] Invalid email → inline validation error
-- [ ] Wrong password → "Invalid credentials" snackbar
-- [ ] Network error → "No connection" snackbar
+- [x] User can register with email + password + username
+- [x] User can log in and is redirected to home feed
+- [x] Session persists across app kill/restart (via `supabase.auth.sessionStatus`)
+- [x] "Sign out" clears session and navigates to login
+- [x] Profile screen shows username, email, trip count, and photo count
+- [x] Invalid email / password / username → inline validation error
+- [x] Wrong password → "Invalid credentials" snackbar
+- [x] Network error → "No connection" snackbar
 
 ## Notes for implementing agent
 

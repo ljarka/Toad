@@ -13,11 +13,11 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 
 | Task | Description | Status | Phase |
 |---|---|---|---|
-| [T-001](T-001-supabase-spike.md) | Supabase + Android SDK integration spike | `done` (`e75e1c7`) | Etap 0 |
+| [T-001](T-001-supabase-spike.md) | Supabase + Android SDK integration spike | `done` (`94e42af`) | Etap 0 |
 | [T-002](T-002-maplibre-spike.md) | MapLibre + GPS track recording spike | `done` | Etap 0 |
-| [T-003](T-003-weather-api-spike.md) | Open-Meteo weather API spike | `done` (`4b862f9`) | Etap 0 |
-| [T-004](T-004-repo-ci-schema.md) | Repo structure, CI, Supabase schema | `done` (`4b862f9`) | Etap 1 |
-| [T-005](T-005-auth.md) | Auth: login, register, profile | `ready` | Etap 2 |
+| [T-003](T-003-weather-api-spike.md) | Open-Meteo weather API spike | `done` (`974fc85`) | Etap 0 |
+| [T-004](T-004-repo-ci-schema.md) | Repo structure, CI, Supabase schema | `done` (`974fc85`) | Etap 1 |
+| [T-005](T-005-auth.md) | Auth: login, register, profile | `done` (`9ad8f0f`) | Etap 2 |
 | [T-006](T-006-species-db.md) | Species database (Room + seed data) | `ready` | Etap 3 |
 | [T-007](T-007-species-guide.md) | Species guide screen | `ready` | Etap 3 |
 | [T-008](T-008-home-feed.md) | Home screen: season info + community feed | `ready` | Etap 4 |
@@ -38,7 +38,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 |---|---|---|
 | Etap 0 — Tech spikes | Supabase, MapLibre, weather API | 3/3 |
 | Etap 1 — Foundation | Repo structure, CI, Supabase schema | 1/1 |
-| Etap 2 — Auth | Login, register, profile | 0/1 |
+| Etap 2 — Auth | Login, register, profile | 1/1 |
 | Etap 3 — Species | Catalog, species guide screen | 0/2 |
 | Etap 4 — Home feed | Season info, community photos | 0/1 |
 | Etap 5 — Photo sharing | Upload + GPS, community map | 0/2 |

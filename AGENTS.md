@@ -31,13 +31,13 @@ Do not load the whole project. `AGENTS.md` tells you what to read.
 
 | Module / Package | Scope | Status |
 |---|---|---|
-| `app/ui/auth/` | Login, register, profile screens | todo |
+| `app/ui/auth/` | Login, register, profile screens | done |
 | `app/ui/feed/` | Home feed: season mushrooms + community photos | todo |
 | `app/ui/map/` | Community photo map, heatmap overlay | todo |
 | `app/ui/trip/` | Trip planning, route recording, car marker, photo placement | todo |
 | `app/ui/history/` | Past trips list + detail | todo |
 | `app/ui/species/` | Species guide + detail | todo |
-| `app/data/supabase/` | Supabase client: auth, database, storage, realtime | in-progress (SDK + Hilt module done) |
+| `app/data/supabase/` | Supabase client: auth, database, storage, realtime | in-progress (SDK + Auth + Profile done) |
 | `app/data/weather/` | Open-Meteo API client + local cache | in-progress (API client done) |
 | `app/data/probability/` | Mushroom occurrence probability engine | todo |
 

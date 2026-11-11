@@ -2,4 +2,30 @@
     <string name="app_name">Toad</string>
     <string name="home_coming_soon">Grzybobranie już wkrótce: przewodnik po gatunkach, mapa znalezisk i prognoza wysypu.</string>
     <string name="home_version">Wersja %1$s</string>
+    <string name="home_profile_button">Profil</string>
+
+    <string name="auth_login_title">Zaloguj się do Toad</string>
+    <string name="auth_login_subtitle">Twoje wyprawy, zdjęcia i mapa grzybiarzy</string>
+    <string name="auth_register_title">Utwórz konto</string>
+    <string name="auth_register_subtitle">Dołącz do społeczności grzybiarzy</string>
+    <string name="auth_email_label">Adres e-mail</string>
+    <string name="auth_password_label">Hasło</string>
+    <string name="auth_username_label">Nazwa użytkownika</string>
+    <string name="auth_sign_in_button">Zaloguj się</string>
+    <string name="auth_create_account_button">Utwórz konto</string>
+    <string name="auth_go_to_register">Nie masz konta? Utwórz konto</string>
+    <string name="auth_go_to_login">Masz już konto? Zaloguj się</string>
+
+    <string name="auth_error_invalid_email">Podaj poprawny adres e-mail</string>
+    <string name="auth_error_weak_password">Hasło musi mieć co najmniej 6 znaków</string>
+    <string name="auth_error_invalid_username">Nazwa użytkownika musi mieć 3–30 znaków</string>
+    <string name="auth_error_invalid_credentials">Invalid credentials — nieprawidłowy e-mail lub hasło</string>
+    <string name="auth_error_username_taken">Username already taken — ta nazwa użytkownika jest już zajęta</string>
+    <string name="auth_error_no_connection">No connection — brak połączenia z internetem</string>
+
+    <string name="profile_title">Twój profil</string>
+    <string name="profile_trips_label">Wyprawy</string>
+    <string name="profile_photos_label">Zdjęcia</string>
+    <string name="profile_sign_out_button">Wyloguj się</string>
+    <string name="profile_back_button">Wróć</string>
 </resources>

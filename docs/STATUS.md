@@ -10,7 +10,7 @@ _Last updated: 2026-11-11_
 | T-002 | MapLibre spike | done | Etap 1 |
 | T-003 | Open-Meteo API spike | done | Etap 1 |
 | T-004 | Repo, CI, DB schema | done | Etap 2 |
-| T-005 | Auth (login/register/profile) | ready | Etap 3 |
+| T-005 | Auth (login/register/profile) | done | Etap 3 |
 | T-006 | Species database (Room + FTS4) | ready | Etap 3 |
 | T-007 | Species guide screen | ready | Etap 4 |
 | T-008 | Home feed | ready | Etap 4 |
