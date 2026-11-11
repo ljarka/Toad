@@ -5,7 +5,7 @@ Authentication and user profile screens ([ADR 0001](../../../../../../../../docs
 ## Files
 
 - `LoginScreen.kt` — Email + password sign-in form with inline validation and error snackbar.
-- `RegisterScreen.kt` — Username + email + password registration form with inline validation and error snackbar.
+- `RegisterScreen.kt` — Username + email + password registration form with inline validation and a long snackbar for errors and the "check your e-mail" confirmation notice.
 - `ProfileScreen.kt` — User avatar initial badge, username, email, trip/photo counters, and sign-out action.
 - `AuthViewModel.kt` — Manages login/register form state, validation (`AuthValidator`), and reactive `sessionState`.
 - `ProfileViewModel.kt` — Loads `UserProfile` (`profiles` + `trips` / `mushroom_photos` counts) and triggers sign-out.

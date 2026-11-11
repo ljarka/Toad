@@ -2,6 +2,7 @@ package com.github.ljarka.toad.data.supabase
 
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.exception.AuthErrorCode
 import io.github.jan.supabase.auth.exception.AuthRestException
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.auth.status.SessionStatus
@@ -29,8 +30,23 @@ sealed interface AuthSessionState {
 sealed class AuthFailure(override val message: String) : Exception(message) {
     data object InvalidCredentials : AuthFailure("Invalid credentials")
     data object UsernameTaken : AuthFailure("Username already taken")
+    data object EmailTaken : AuthFailure("Email already registered")
+    data object EmailNotConfirmed : AuthFailure("Email not confirmed")
+    data object WeakPassword : AuthFailure("Password too weak")
+    data object EmailNotAuthorized : AuthFailure("Email address not authorized")
+    data object RateLimited : AuthFailure("Too many requests")
+    data object SignupDisabled : AuthFailure("Signups disabled")
     data object NetworkError : AuthFailure("No connection")
     data class ServerError(val detail: String) : AuthFailure(detail)
+}
+
+/** Result of a successful sign-up call. */
+enum class SignUpOutcome {
+    /** Account created and a session is active (email confirmation disabled). */
+    SignedIn,
+
+    /** Account created, but the user must click the link in the confirmation e-mail first. */
+    ConfirmationRequired,
 }
 
 object AuthValidator {
@@ -89,7 +105,7 @@ class AuthRepository @Inject constructor(
             onFailure = { Result.failure(mapError(it)) },
         )
 
-    suspend fun signUp(email: String, password: String, username: String): Result<Unit> {
+    suspend fun signUp(email: String, password: String, username: String): Result<SignUpOutcome> {
         val cleanEmail = email.trim()
         val cleanUsername = username.trim()
         return runCatching {
@@ -102,7 +118,9 @@ class AuthRepository @Inject constructor(
                 throw AuthFailure.UsernameTaken
             }
 
-            val result = supabase.auth.signUpWith(Email) {
+            // The `profiles` row is created server-side by the `on_auth_user_created` trigger
+            // (0002_auth_trigger.sql) from `raw_user_meta_data.username`.
+            supabase.auth.signUpWith(Email) {
                 this.email = cleanEmail
                 this.password = password
                 data = buildJsonObject {
@@ -110,17 +128,19 @@ class AuthRepository @Inject constructor(
                 }
             }
 
-            val userId = result?.id ?: supabase.auth.currentUserOrNull()?.id
+            // With "Confirm email" enabled Supabase returns the user but no session. Writing to
+            // `profiles` then runs as `anon` and RLS rejects it, so only touch the table with a session.
+            val session = supabase.auth.currentSessionOrNull() ?: return@runCatching SignUpOutcome.ConfirmationRequired
+            val userId = session.user?.id ?: supabase.auth.currentUserOrNull()?.id
             if (!userId.isNullOrBlank()) {
-                supabase.from("profiles").upsert(
-                    ProfileDto(
-                        id = userId,
-                        username = cleanUsername,
-                    )
-                )
+                // Fallback for projects without the trigger; failure is not fatal — the account exists.
+                runCatching {
+                    supabase.from("profiles").upsert(ProfileDto(id = userId, username = cleanUsername))
+                }
             }
+            SignUpOutcome.SignedIn
         }.fold(
-            onSuccess = { Result.success(Unit) },
+            onSuccess = { Result.success(it) },
             onFailure = { Result.failure(mapError(it)) },
         )
     }
@@ -147,17 +167,7 @@ class AuthRepository @Inject constructor(
                     AuthFailure.ServerError(error.message ?: "Database error")
                 }
             }
-            is AuthRestException -> {
-                val msg = error.message.orEmpty()
-                when {
-                    msg.contains("already", ignoreCase = true) && msg.contains("username", ignoreCase = true) ->
-                        AuthFailure.UsernameTaken
-                    error.statusCode == 400 || error.statusCode == 401 ||
-                        msg.contains("invalid", ignoreCase = true) ->
-                        AuthFailure.InvalidCredentials
-                    else -> AuthFailure.ServerError(error.errorDescription.ifBlank { msg.ifBlank { "Auth error" } })
-                }
-            }
+            is AuthRestException -> mapAuthRestError(error)
             is RestException -> {
                 if (error.statusCode == 409) {
                     AuthFailure.UsernameTaken
@@ -175,4 +185,24 @@ class AuthRepository @Inject constructor(
                 }
             }
         }
+
+    private fun mapAuthRestError(error: AuthRestException): AuthFailure {
+        val msg = error.message.orEmpty()
+        return when (error.errorCode) {
+            AuthErrorCode.UserAlreadyExists, AuthErrorCode.EmailExists -> AuthFailure.EmailTaken
+            AuthErrorCode.EmailNotConfirmed -> AuthFailure.EmailNotConfirmed
+            AuthErrorCode.WeakPassword -> AuthFailure.WeakPassword
+            AuthErrorCode.EmailAddressNotAuthorized -> AuthFailure.EmailNotAuthorized
+            AuthErrorCode.OverEmailSendRateLimit, AuthErrorCode.OverRequestRateLimit -> AuthFailure.RateLimited
+            AuthErrorCode.SignupDisabled, AuthErrorCode.EmailProviderDisabled -> AuthFailure.SignupDisabled
+            AuthErrorCode.InvalidCredentials -> AuthFailure.InvalidCredentials
+            else -> when {
+                msg.contains("already registered", ignoreCase = true) -> AuthFailure.EmailTaken
+                msg.contains("already", ignoreCase = true) && msg.contains("username", ignoreCase = true) ->
+                    AuthFailure.UsernameTaken
+                msg.contains("invalid login", ignoreCase = true) -> AuthFailure.InvalidCredentials
+                else -> AuthFailure.ServerError(error.errorDescription.ifBlank { msg.ifBlank { "Auth error" } })
+            }
+        }
+    }
 }

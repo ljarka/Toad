@@ -6,6 +6,7 @@ import com.github.ljarka.toad.data.supabase.AuthFailure
 import com.github.ljarka.toad.data.supabase.AuthRepository
 import com.github.ljarka.toad.data.supabase.AuthSessionState
 import com.github.ljarka.toad.data.supabase.AuthValidator
+import com.github.ljarka.toad.data.supabase.SignUpOutcome
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -118,7 +119,16 @@ class AuthViewModel @Inject constructor(
             )
             _registerState.update { state ->
                 result.fold(
-                    onSuccess = { state.copy(isLoading = false, password = "") },
+                    onSuccess = { outcome ->
+                        state.copy(
+                            isLoading = false,
+                            password = "",
+                            snackbarMessage = when (outcome) {
+                                SignUpOutcome.ConfirmationRequired -> CONFIRMATION_REQUIRED_MESSAGE
+                                SignUpOutcome.SignedIn -> null
+                            },
+                        )
+                    },
                     onFailure = { error ->
                         state.copy(
                             isLoading = false,
@@ -137,11 +147,21 @@ class AuthViewModel @Inject constructor(
     }
 
     companion object {
+        internal const val CONFIRMATION_REQUIRED_MESSAGE =
+            "Konto utworzone. Kliknij link w e-mailu potwierdzającym, a potem zaloguj się."
+
         internal fun formatAuthError(error: Throwable): String =
             when (error) {
                 is AuthFailure.InvalidCredentials -> "Invalid credentials — nieprawidłowy e-mail lub hasło"
                 is AuthFailure.UsernameTaken -> "Username already taken — ta nazwa użytkownika jest już zajęta"
                 is AuthFailure.NetworkError -> "No connection — brak połączenia z internetem"
+                is AuthFailure.EmailTaken -> "Konto z tym adresem e-mail już istnieje — zaloguj się"
+                is AuthFailure.EmailNotConfirmed -> "Potwierdź adres e-mail (link w wiadomości), a potem zaloguj się"
+                is AuthFailure.WeakPassword -> "Hasło jest za słabe — użyj dłuższego lub bardziej złożonego"
+                is AuthFailure.EmailNotAuthorized ->
+                    "Serwer nie może wysłać e-maila na ten adres (brak skonfigurowanego SMTP w Supabase)"
+                is AuthFailure.RateLimited -> "Za dużo prób — spróbuj ponownie za chwilę"
+                is AuthFailure.SignupDisabled -> "Rejestracja jest obecnie wyłączona"
                 is AuthFailure.ServerError -> error.detail
                 else -> error.message ?: "Wystąpił błąd uwierzytelniania"
             }

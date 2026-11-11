@@ -6,7 +6,7 @@ Supabase Android SDK (`supabase-kt` 3.9.0) integration ([ADR 0001](../../../../.
 
 - `SupabaseModule.kt` — Hilt `@Singleton` binding and `createToadSupabaseClient(...)` factory installing `Auth`, `Postgrest`, `Storage`, and `Realtime` on `OkHttp.create()`.
 - `SupabaseDtos.kt` — `ProfileDto` and `MushroomPhotoDto` matching `supabase/migrations/0001_initial_schema.sql`.
-- `AuthRepository.kt` — Email/password sign-in, sign-up (with username uniqueness check and `profiles` row upsert), sign-out, reactive `sessionState`, and `AuthValidator`.
+- `AuthRepository.kt` — Email/password sign-in, sign-up (username uniqueness check; returns `SignUpOutcome.ConfirmationRequired` when "Confirm email" leaves no session — the `profiles` row then comes only from the `on_auth_user_created` trigger, never a client write as `anon`), sign-out, `AuthErrorCode`-based error mapping, reactive `sessionState`, and `AuthValidator`.
 - `ProfileRepository.kt` — Loads `UserProfile` (`profiles` row + `trips` and `mushroom_photos` counts).
 
 ## Key findings (T-001)
