@@ -1,6 +1,6 @@
 # T-006 — Species database (Room + seed data)
 
-**Status:** ready  
+**Status:** done (`d13200a`)  
 **Phase:** Etap 3  
 **Depends on:** T-004
 

@@ -18,7 +18,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | [T-003](T-003-weather-api-spike.md) | Open-Meteo weather API spike | `done` (`974fc85`) | Etap 0 |
 | [T-004](T-004-repo-ci-schema.md) | Repo structure, CI, Supabase schema | `done` (`974fc85`) | Etap 1 |
 | [T-005](T-005-auth.md) | Auth: login, register, profile | `done` (`71170f2`) | Etap 2 |
-| [T-006](T-006-species-db.md) | Species database (Room + seed data) | `ready` | Etap 3 |
+| [T-006](T-006-species-db.md) | Species database (Room + seed data) | `done` (`d13200a`) | Etap 3 |
 | [T-007](T-007-species-guide.md) | Species guide screen | `ready` | Etap 3 |
 | [T-008](T-008-home-feed.md) | Home screen: season info + community feed | `ready` | Etap 4 |
 | [T-009](T-009-photo-upload.md) | Photo upload with GPS + species tag | `ready` | Etap 5 |
@@ -39,7 +39,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | Etap 0 — Tech spikes | Supabase, MapLibre, weather API | 3/3 |
 | Etap 1 — Foundation | Repo structure, CI, Supabase schema | 1/1 |
 | Etap 2 — Auth | Login, register, profile | 1/1 |
-| Etap 3 — Species | Catalog, species guide screen | 0/2 |
+| Etap 3 — Species | Catalog, species guide screen | 1/2 |
 | Etap 4 — Home feed | Season info, community photos | 0/1 |
 | Etap 5 — Photo sharing | Upload + GPS, community map | 0/2 |
 | Etap 6 — Probability | Algorithm + display | 0/2 |
