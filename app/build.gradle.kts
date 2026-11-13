@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.paparazzi)
+    alias(libs.plugins.room)
 }
 
 // Supabase credentials: local.properties (local builds) or environment (CI). Never committed.
@@ -104,12 +105,20 @@ dependencies {
     implementation(libs.supabase.storage)
     implementation(libs.supabase.realtime)
     implementation(libs.ktor.client.okhttp)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
     testImplementation(libs.junit)
     testImplementation(libs.ktor.client.mock)
+    testImplementation(libs.room.testing)
     debugImplementation(libs.androidx.ui.tooling)
 }
 
 // AGP 9 builds Kotlin itself (no org.jetbrains.kotlin.android plugin).
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 kotlin {
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)

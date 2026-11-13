@@ -1,0 +1,130 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "6e354a0761cc79d59bd23b3cf035473d",
+    "entities": [
+      {
+        "tableName": "species",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name_pl` TEXT NOT NULL, `name_latin` TEXT NOT NULL, `name_common` TEXT NOT NULL, `edibility` TEXT NOT NULL, `season_start` INTEGER NOT NULL, `season_end` INTEGER NOT NULL, `habitat` TEXT NOT NULL, `description` TEXT NOT NULL, `thumbnail_asset` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "namePl",
+            "columnName": "name_pl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameLatin",
+            "columnName": "name_latin",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameCommon",
+            "columnName": "name_common",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "edibility",
+            "columnName": "edibility",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonStart",
+            "columnName": "season_start",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "seasonEnd",
+            "columnName": "season_end",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "habitat",
+            "columnName": "habitat",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thumbnailAsset",
+            "columnName": "thumbnail_asset",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "species_fts",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`name_pl` TEXT NOT NULL, `name_latin` TEXT NOT NULL, `name_common` TEXT NOT NULL, content=`species`)",
+        "fields": [
+          {
+            "fieldPath": "namePl",
+            "columnName": "name_pl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameLatin",
+            "columnName": "name_latin",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameCommon",
+            "columnName": "name_common",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": []
+        },
+        "ftsVersion": "FTS4",
+        "ftsOptions": {
+          "tokenizer": "simple",
+          "tokenizerArgs": [],
+          "contentTable": "species",
+          "languageIdColumnName": "",
+          "matchInfo": "FTS4",
+          "notIndexedColumns": [],
+          "prefixSizes": [],
+          "preferredOrder": "ASC"
+        },
+        "contentSyncTriggers": [
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_species_fts_BEFORE_UPDATE BEFORE UPDATE ON `species` BEGIN DELETE FROM `species_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_species_fts_BEFORE_DELETE BEFORE DELETE ON `species` BEGIN DELETE FROM `species_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_species_fts_AFTER_UPDATE AFTER UPDATE ON `species` BEGIN INSERT INTO `species_fts`(`docid`, `name_pl`, `name_latin`, `name_common`) VALUES (NEW.`rowid`, NEW.`name_pl`, NEW.`name_latin`, NEW.`name_common`); END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_species_fts_AFTER_INSERT AFTER INSERT ON `species` BEGIN INSERT INTO `species_fts`(`docid`, `name_pl`, `name_latin`, `name_common`) VALUES (NEW.`rowid`, NEW.`name_pl`, NEW.`name_latin`, NEW.`name_common`); END"
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6e354a0761cc79d59bd23b3cf035473d')"
+    ]
+  }
+}
