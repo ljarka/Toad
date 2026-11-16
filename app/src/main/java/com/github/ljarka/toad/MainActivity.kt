@@ -6,15 +6,25 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.github.ljarka.toad.data.supabase.AuthSessionState
 import com.github.ljarka.toad.ui.auth.AuthViewModel
@@ -23,6 +33,8 @@ import com.github.ljarka.toad.ui.auth.ProfileScreen
 import com.github.ljarka.toad.ui.auth.ProfileViewModel
 import com.github.ljarka.toad.ui.auth.RegisterScreen
 import com.github.ljarka.toad.ui.feed.HomeScreen
+import com.github.ljarka.toad.ui.species.SpeciesDetailScreen
+import com.github.ljarka.toad.ui.species.SpeciesListScreen
 import com.github.ljarka.toad.ui.theme.ToadTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -105,28 +117,82 @@ private fun AuthNavGraph(authViewModel: AuthViewModel) {
 @Composable
 private fun AppNavGraph() {
     val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = "home",
-    ) {
-        composable("home") {
-            HomeScreen(
-                versionName = BuildConfig.VERSION_NAME,
-                onOpenProfile = {
-                    navController.navigate("profile") {
-                        launchSingleTop = true
-                    }
-                },
-            )
-        }
-        composable("profile") {
-            val profileViewModel: ProfileViewModel = hiltViewModel()
-            val profile by profileViewModel.profile.collectAsState()
-            ProfileScreen(
-                profile = profile,
-                onSignOutClick = profileViewModel::signOut,
-                onBackClick = { navController.popBackStack() },
-            )
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    val showBottomBar = currentRoute == "home" || currentRoute == "speciesList"
+
+    Scaffold(
+        bottomBar = {
+            if (showBottomBar) {
+                NavigationBar {
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Default.Home, contentDescription = "Dom") },
+                        label = { Text("Dom") },
+                        selected = currentRoute == "home",
+                        onClick = {
+                            navController.navigate("home") {
+                                popUpTo("home") { inclusive = false }
+                                launchSingleTop = true
+                            }
+                        },
+                    )
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Default.List, contentDescription = "Grzyby") },
+                        label = { Text("Grzyby") },
+                        selected = currentRoute == "speciesList",
+                        onClick = {
+                            navController.navigate("speciesList") {
+                                popUpTo("home") { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
+                    )
+                }
+            }
+        },
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "home",
+            modifier = Modifier.padding(innerPadding),
+        ) {
+            composable("home") {
+                HomeScreen(
+                    versionName = BuildConfig.VERSION_NAME,
+                    onOpenProfile = {
+                        navController.navigate("profile") {
+                            launchSingleTop = true
+                        }
+                    },
+                )
+            }
+            composable("profile") {
+                val profileViewModel: ProfileViewModel = hiltViewModel()
+                val profile by profileViewModel.profile.collectAsState()
+                ProfileScreen(
+                    profile = profile,
+                    onSignOutClick = profileViewModel::signOut,
+                    onBackClick = { navController.popBackStack() },
+                )
+            }
+            composable("speciesList") {
+                SpeciesListScreen(
+                    onNavigateToDetail = { speciesId ->
+                        navController.navigate("speciesDetail/$speciesId")
+                    },
+                )
+            }
+            composable("speciesDetail/{speciesId}") { backStackEntry ->
+                val speciesId = backStackEntry.arguments?.getString("speciesId")?.toIntOrNull()
+                if (speciesId != null) {
+                    SpeciesDetailScreen(
+                        speciesId = speciesId,
+                        onBack = { navController.popBackStack() },
+                    )
+                }
+            }
         }
     }
 }

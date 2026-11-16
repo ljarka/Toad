@@ -15,7 +15,9 @@ object SpeciesModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "toad.db").build()
+        Room.databaseBuilder(context, AppDatabase::class.java, "toad.db")
+            .fallbackToDestructiveMigration(true)
+            .build()
 
     @Provides
     fun provideSpeciesDao(db: AppDatabase): SpeciesDao = db.speciesDao()

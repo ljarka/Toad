@@ -15,5 +15,6 @@ data class SpeciesEntity(
     @ColumnInfo(name = "season_end") val seasonEnd: Int,
     val habitat: String,
     val description: String,
-    @ColumnInfo(name = "thumbnail_asset") val thumbnailAsset: String = "ic_mushroom_placeholder"
+    @ColumnInfo(name = "thumbnail_asset") val thumbnailAsset: String = "ic_mushroom_placeholder",
+    val lookalikes: String = "",
 )

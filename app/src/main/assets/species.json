@@ -9,7 +9,8 @@
     "season_end": 11,
     "habitat": "mixed,conifer",
     "description": "Król grzybów. Kapelusz brązowy, trzón beczułkowaty z białą siateczką. Miąższ biały, nie zmienia barwy po przekrojeniu.",
-    "thumbnail_asset": "ic_mushroom_placeholder"
+    "thumbnail_asset": "ic_mushroom_placeholder",
+    "lookalikes": "9"
   },
   {
     "id": 2,

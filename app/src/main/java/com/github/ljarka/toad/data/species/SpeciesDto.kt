@@ -14,7 +14,8 @@ data class SpeciesDto(
     @SerialName("season_end") val seasonEnd: Int,
     val habitat: String,
     val description: String,
-    @SerialName("thumbnail_asset") val thumbnailAsset: String = "ic_mushroom_placeholder"
+    @SerialName("thumbnail_asset") val thumbnailAsset: String = "ic_mushroom_placeholder",
+    val lookalikes: String = "",
 ) {
     fun toEntity() = SpeciesEntity(
         id = id,
@@ -26,6 +27,7 @@ data class SpeciesDto(
         seasonEnd = seasonEnd,
         habitat = habitat,
         description = description,
-        thumbnailAsset = thumbnailAsset
+        thumbnailAsset = thumbnailAsset,
+        lookalikes = lookalikes,
     )
 }

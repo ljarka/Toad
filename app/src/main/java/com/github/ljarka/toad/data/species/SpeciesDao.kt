@@ -26,6 +26,9 @@ interface SpeciesDao {
     @Query("SELECT COUNT(*) FROM species")
     suspend fun count(): Int
 
+    @Query("SELECT * FROM species WHERE id IN (:ids)")
+    suspend fun getByIds(ids: List<Int>): List<SpeciesEntity>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(species: List<SpeciesEntity>)
 }
