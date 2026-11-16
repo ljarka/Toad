@@ -6,8 +6,7 @@
 
 ## Goal
 
-The first screen the user sees after login: what mushrooms are findable right now + community
-photos from other users, newest first.
+The first screen the user sees (including guests per ADR 0008): what mushrooms are findable right now + public community photos from other users, newest first.
 
 ## Design
 
@@ -56,5 +55,5 @@ supabase.from("mushroom_photos")
 - [ ] Pull-to-refresh reloads the feed
 - [ ] Pagination loads more photos on scroll to bottom
 - [ ] New photo uploaded by another user appears at top within 5 s (Realtime)
-- [ ] Logged-out users are redirected to login (not shown the feed)
+- [ ] Guests can browse season section and public feed; creating/uploading redirects to login (`requireLogin`)
 - [ ] Empty state shown when feed has no photos yet

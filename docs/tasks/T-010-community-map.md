@@ -18,13 +18,12 @@ Tapping a pin opens the photo. Tapping a cluster zooms in.
 - Bottom sheet: appears when tapping a single pin — photo thumbnail, species name, username, date, caption; "Pokaż szczegóły" button
 
 ### Data loading
-Load photos within the current map viewport (bounding box), max 500 points:
+Load photos within the current map viewport (bounding box), max 500 points via a PostGIS RPC function (`photos_in_bbox(sw_lon, sw_lat, ne_lon, ne_lat)`) backed by `ST_MakeEnvelope(..., 4326)` and the `GIST` index on `mushroom_photos.location`:
 ```kotlin
-supabase.from("mushroom_photos")
-    .select("id, location, storage_path, species(name_pl), profiles(username), taken_at")
-    .eq("is_public", true)
-    .filter("location", FilterOperator.GT, "ST_MakeEnvelope(${sw_lon},${sw_lat},${ne_lon},${ne_lat},4326)")
-    .limit(500)
+supabase.postgrest.rpc(
+    "photos_in_bbox",
+    mapOf("sw_lon" to swLon, "sw_lat" to swLat, "ne_lon" to neLon, "ne_lat" to neLat),
+).decodeList<MapPhotoDto>()
 ```
 Reload on camera idle (debounce 500 ms). Cache last result; don't reload if viewport unchanged.
 

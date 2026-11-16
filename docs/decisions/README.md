@@ -9,3 +9,4 @@
 | [0005](0005-photo-storage.md) | Photo storage: Supabase Storage | Accepted |
 | [0006](0006-probability-algorithm.md) | Probability: client-side, weather-based | Accepted |
 | [0007](0007-ci-distribution.md) | CI: GitHub Actions + Obtainium distribution | Accepted |
+| [0008](0008-guest-browsing.md) | Guest browsing: public read, login required to create | Accepted |

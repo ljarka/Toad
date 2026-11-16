@@ -15,15 +15,10 @@ Save the route to Supabase when the user ends the trip.
 
 States: `IDLE → RECORDING → PAUSED → ENDED`
 
-Managed by `TripRecordingService` (foreground service):
+Managed by `TripRecordingService` (foreground service), using Android's `LocationManager` (consistent with T-009, no Play Services dependency):
 ```kotlin
 class TripRecordingService : Service() {
-    private val locationClient by lazy {
-        LocationServices.getFusedLocationProviderClient(this)
-    }
-    private val locationRequest = LocationRequest.Builder(
-        Priority.PRIORITY_HIGH_ACCURACY, 5_000L  // every 5 seconds
-    ).setMinUpdateDistanceMeters(5f).build()      // ignore if moved < 5m
+    // Request GPS updates every 5_000 ms or 5 m minimum distance via LocationManager
 
     fun startRecording() { /* request updates, persist to Room */ }
     fun pause() { /* stop location updates, keep session open */ }

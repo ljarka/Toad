@@ -24,12 +24,12 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | [T-009](T-009-photo-upload.md) | Photo upload with GPS + species tag | `ready` | Etap 5 |
 | [T-010](T-010-community-map.md) | Community photo map | `ready` | Etap 5 |
 | [T-011](T-011-probability.md) | Mushroom probability engine | `ready` | Etap 6 |
-| [T-012](T-012-probability-display.md) | Probability display on home + map | `ready` | Etap 6 |
-| [T-013](T-013-route-recording.md) | Trip: GPS route recording | `ready` | Etap 7 |
+| [T-012](T-012-probability-ui.md) | Probability display on home + map | `ready` | Etap 6 |
+| [T-013](T-013-gps-route.md) | Trip: GPS route recording | `ready` | Etap 7 |
 | [T-014](T-014-car-marker.md) | Trip: car location marker | `ready` | Etap 7 |
 | [T-015](T-015-trip-photos.md) | Trip: attach photos to route | `ready` | Etap 7 |
 | [T-016](T-016-trip-history.md) | Trip history list + detail | `ready` | Etap 7 |
-| [T-017](T-017-trip-planning-ux.md) | Trip planning UX (pre-trip route sketch) | `draft` | Etap 7 |
+| [T-017](T-017-trip-planning.md) | Trip planning UX (pre-trip route sketch) | `draft` | Etap 7 |
 | [T-018](T-018-release.md) | Release: signing + Obtainium | `done` (`00baedd`, `v0.1.0`) | Etap 8 |
 
 ## Roadmap
