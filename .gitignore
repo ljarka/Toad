@@ -10,3 +10,11 @@ build/
 local.properties
 *.jks
 *.keystore
+
+# Obsidian vault settings
+.obsidian/
+
+# AI tooling
+.claude/
+.copilot/
+copilot/
