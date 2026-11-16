@@ -7,7 +7,7 @@ Room database with Polish mushroom species. Seeded from `assets/species.json` on
 - `SpeciesFts.kt` — FTS4 virtual table for full-text search
 - `SpeciesDao.kt` — CRUD + FTS search + season filter
 - `SpeciesDto.kt` — JSON deserialization DTO with `toEntity()` mapper
-- `AppDatabase.kt` — Room database (version 1); schema exported to `app/schemas/`
+- `AppDatabase.kt` — Room database (version 2); schema exported to `app/schemas/`
 - `SpeciesModule.kt` — Hilt singleton providers for `AppDatabase` and `SpeciesDao`
 - `SpeciesSeeder.kt` — Seeds DB from `assets/species.json` if empty; called from `ToadApp.onCreate()`
 

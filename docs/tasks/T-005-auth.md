@@ -1,6 +1,6 @@
 # T-005 — Auth: login, register, profile
 
-**Status:** done (`71170f2`)  
+**Status:** in-progress (initial auth `71170f2` done; browse-first ADR-0008 pending in `MainActivity.kt`)  
 **Phase:** Etap 2  
 **Depends on:** T-004
 

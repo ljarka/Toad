@@ -1,7 +1,7 @@
 # T-017 — Trip planning (pre-trip route sketch)
 
 **Status:** draft  
-**Phase:** Etap 8  
+**Phase:** Etap 7  
 
 ## Goal
 

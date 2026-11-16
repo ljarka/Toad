@@ -27,7 +27,7 @@ insert into public.species (
   (17, 'Gołąbek zielonawy',      'Russula virescens',        'edible', 6,  10, 'deciduous',         'Dobry grzyb jadalny. Kapelusz zielony, popękany. Miąższ kruchy, biały.', 'ic_mushroom_placeholder'),
   (18, 'Pieczarka polna',        'Agaricus campestris',      'edible', 6,  10, 'meadow',            'Pospolity grzyb łąkowy. Blaszki różowe, potem brązowoczarne. Pierścień prosty.', 'ic_mushroom_placeholder'),
   (19, 'Purchawka olbrzymia',    'Calvatia gigantea',        'edible', 7,  10, 'meadow,deciduous',  'Kulista, do 50 cm średnicy. Jadalna gdy miąższ biały. Rośnie na łąkach i skrajach lasów.', 'ic_mushroom_placeholder'),
-  (20, 'Łisica',                 'Laetiporus sulphureus',    'edible', 6,  10, 'deciduous',         'Rośnie na pniach drzew liściastych. Pomarańczowożółte wachlarze. Jadalny gdy młody.', 'ic_mushroom_placeholder'),
+  (20, 'Żółciak siarkowy',       'Laetiporus sulphureus',    'edible', 6,  10, 'deciduous',         'Rośnie na pniach drzew liściastych. Pomarańczowożółte wachlarze. Jadalny gdy młody.', 'ic_mushroom_placeholder'),
   (21, 'Borowik ceglastopory',   'Neoboletus luridiformis',  'edible', 7,  10, 'conifer,mixed',     'Jadalny po ugotowaniu. Rurki czerwone, mocno sinieje. Kapelusz brązowy.', 'ic_mushroom_placeholder'),
   (22, 'Koźlarz babka',          'Leccinum scabrum',         'edible', 6,  10, 'deciduous',         'Rośnie pod brzozami. Kapelusz szarobrązowy. Trzon z czarnymi łuskami.', 'ic_mushroom_placeholder'),
   (23, 'Koźlarz czerwony',       'Leccinum aurantiacum',     'edible', 7,  10, 'deciduous',         'Rośnie pod topolami i osami. Kapelusz pomarańczowoczerwony. Miąższ czernieje po przekrojeniu.', 'ic_mushroom_placeholder'),

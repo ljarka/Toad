@@ -20,10 +20,8 @@ This file is the index. Keep it short (< 150 lines); details live where the tabl
 | **What to do next, exactly** | [docs/tasks/](docs/tasks/README.md) (task queue) |
 | One-page overview | [docs/STATUS.md](docs/STATUS.md) |
 | Why something is the way it is | [docs/decisions/](docs/decisions/README.md) (ADRs) |
-| Mushroom species data format | [docs/species-schema.md](docs/species-schema.md) |
-| Probability algorithm | [docs/probability-algorithm.md](docs/probability-algorithm.md) |
+| UX & design specification | [docs/design/UX-SPEC.md](docs/design/UX-SPEC.md) |
 | What was done when | [docs/history.md](docs/history.md) |
-| Recurring procedures | [docs/playbooks/](docs/playbooks/README.md) |
 
 Do not load the whole project. `AGENTS.md` tells you what to read.
 
@@ -36,7 +34,8 @@ Do not load the whole project. `AGENTS.md` tells you what to read.
 | `app/ui/map/` | Community photo map, heatmap overlay | todo |
 | `app/ui/trip/` | Trip planning, route recording, car marker, photo placement | todo |
 | `app/ui/history/` | Past trips list + detail | todo |
-| `app/ui/species/` | Species guide + detail | todo |
+| `app/ui/species/` | Species guide + detail | done |
+| `app/data/species/` | Room DB v2 + FTS4 species catalog (`species.json`) | done |
 | `app/data/supabase/` | Supabase client: auth, database, storage, realtime | in-progress (SDK + Auth + Profile done) |
 | `app/data/weather/` | Open-Meteo API client + local cache | in-progress (API client done) |
 | `app/data/probability/` | Mushroom occurrence probability engine | todo |
@@ -48,7 +47,7 @@ Do not load the whole project. `AGENTS.md` tells you what to read.
 3. **Open-Meteo for all weather data** — no paid weather API ([0003](docs/decisions/0003-weather-open-meteo.md)).
 4. **Photos stored in Supabase Storage** — never in Firestore or as Base64 in the database ([0005](docs/decisions/0005-photo-storage.md)).
 5. **Probability calculated on device** — weather data fetched per-location, algorithm runs client-side ([0006](docs/decisions/0006-probability-algorithm.md)).
-6. **GPS track recording only while trip is active** — never background location; WorkManager not used for location ([0004](docs/decisions/0004-species-database.md)).
+6. **GPS track recording only while trip is active** — never background location; WorkManager not used for location.
 7. **Browse-first, login-on-demand** — the app opens without requiring login. Viewing photos, the community map, the species guide, and probability screens is public. Login is required only for write actions: uploading photos, recording trips. When an unauthenticated user triggers an auth-gated action, navigate to `LoginScreen` with a `returnRoute` and return there after login. See [T-005](docs/tasks/T-005-auth.md).
 8. Changing an accepted decision = new ADR that supersedes it.
 

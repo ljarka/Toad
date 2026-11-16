@@ -52,7 +52,12 @@ class SpeciesViewModel @Inject constructor(
     ) { searchResult, season, edibility, habitat, all ->
         val base = searchResult ?: all
         base.filter { entity ->
-            (season == null || (entity.seasonStart <= season && entity.seasonEnd >= season)) &&
+            val inSeason = season == null || if (entity.seasonStart <= entity.seasonEnd) {
+                season in entity.seasonStart..entity.seasonEnd
+            } else {
+                season >= entity.seasonStart || season <= entity.seasonEnd
+            }
+            inSeason &&
                 (edibility.isEmpty() || entity.edibility in edibility) &&
                 (habitat == null || entity.habitat.split(",").any { it.trim() == habitat })
         }

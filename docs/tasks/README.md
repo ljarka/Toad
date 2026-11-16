@@ -17,7 +17,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | [T-002](T-002-maplibre-spike.md) | MapLibre + GPS track recording spike | `done` | Etap 0 |
 | [T-003](T-003-weather-api-spike.md) | Open-Meteo weather API spike | `done` (`974fc85`) | Etap 0 |
 | [T-004](T-004-repo-ci-schema.md) | Repo structure, CI, Supabase schema | `done` (`974fc85`) | Etap 1 |
-| [T-005](T-005-auth.md) | Auth: login, register, profile | `done` (`71170f2`) | Etap 2 |
+| [T-005](T-005-auth.md) | Auth: login, register, profile | `in-progress` (`71170f2`; ADR-0008 pending) | Etap 2 |
 | [T-006](T-006-species-db.md) | Species database (Room + seed data) | `done` (`d13200a`) | Etap 3 |
 | [T-007](T-007-species-guide.md) | Species guide screen | `done` (`72209d9`) | Etap 3 |
 | [T-008](T-008-home-feed.md) | Home screen: season info + community feed | `ready` | Etap 4 |

@@ -20,7 +20,12 @@ interface SpeciesDao {
     )
     suspend fun search(q: String): List<SpeciesEntity>
 
-    @Query("SELECT * FROM species WHERE season_start <= :month AND season_end >= :month ORDER BY name_pl")
+    @Query(
+        "SELECT * FROM species WHERE " +
+            "(season_start <= season_end AND season_start <= :month AND season_end >= :month) OR " +
+            "(season_start > season_end AND (:month >= season_start OR :month <= season_end)) " +
+            "ORDER BY name_pl"
+    )
     fun getBySeason(month: Int): Flow<List<SpeciesEntity>>
 
     @Query("SELECT COUNT(*) FROM species")

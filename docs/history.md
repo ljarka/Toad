@@ -9,3 +9,6 @@
 | 2026-11-11 | T-005 | Auth flow (`LoginScreen`, `RegisterScreen`, `ProfileScreen`, `AuthViewModel`, `ProfileViewModel`, `AuthRepository`, `ProfileRepository`), `0002_auth_trigger.sql`, unit tests (`AuthRepositoryTest`) and Paparazzi screenshots (`AuthScreenshotTest`) (`71170f2`) |
 | 2026-11-11 | — | Docs consistency after agent handover: fixed stale commit hashes (amended/rebased commits) in task files, queue and history; removed outdated root `STATUS.md` (duplicate of `docs/STATUS.md`) |
 | 2026-11-11 | — | Fix sign-up: with "Confirm email" on, the post-signup `profiles` upsert ran as `anon` and failed RLS, so registration reported an error; now `ConfirmationRequired` is shown, Supabase `error_code`s (`email_address_not_authorized`, `user_already_exists`, `weak_password`, rate limits) map to specific messages |
+| 2026-11-13 | T-006 | Species database: Room v2 + FTS4 (`SpeciesEntity`, `SpeciesFts`, `SpeciesDao`, `SpeciesSeeder`) seeded with 25 Polish species from `assets/species.json` (`d13200a`) |
+| 2026-11-16 | T-007 | Species guide UI: `SpeciesListScreen`, `SpeciesDetailScreen`, `SpeciesViewModel` with FTS search, season/edibility/habitat filters (`72209d9`) |
+| 2026-11-16 | — | Added `UX-SPEC.md` + mockups, `ADR-0008` (browse-first guest mode), and `0003_species_sync_and_map_rpc.sql` (`85e9af7`, `73287a6`) |
