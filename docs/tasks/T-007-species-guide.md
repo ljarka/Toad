@@ -1,6 +1,6 @@
 # T-007 — Species guide screen
 
-**Status:** ready  
+**Status:** done (`72209d9`)  
 **Phase:** Etap 3  
 **Depends on:** T-006
 

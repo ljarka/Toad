@@ -1,7 +1,7 @@
 # Toad — Status
 
-**Next task:** T-007 (Species guide screen)
+**Next task:** T-008 (Home screen: season info + community feed)
 
 ## Last completed
 
-- **T-006** — Species database (Room + seed data) — `d13200a` — 2026-11-13
+- **T-007** — Species guide screen — `72209d9` — 2026-11-16
