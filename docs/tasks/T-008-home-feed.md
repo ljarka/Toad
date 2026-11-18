@@ -1,6 +1,7 @@
 # T-008 — Home screen: season info + community feed
 
-**Status:** ready  
+**Status:** done  
+**Commit:** `89eab88`  
 **Phase:** Etap 4  
 **Depends on:** T-005, T-006
 
