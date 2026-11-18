@@ -32,6 +32,7 @@ import com.github.ljarka.toad.ui.auth.LoginScreen
 import com.github.ljarka.toad.ui.auth.ProfileScreen
 import com.github.ljarka.toad.ui.auth.ProfileViewModel
 import com.github.ljarka.toad.ui.auth.RegisterScreen
+import com.github.ljarka.toad.ui.feed.FeedScreen
 import com.github.ljarka.toad.ui.feed.HomeScreen
 import com.github.ljarka.toad.ui.species.SpeciesDetailScreen
 import com.github.ljarka.toad.ui.species.SpeciesListScreen
@@ -159,12 +160,14 @@ private fun AppNavGraph() {
             modifier = Modifier.padding(innerPadding),
         ) {
             composable("home") {
-                HomeScreen(
-                    versionName = BuildConfig.VERSION_NAME,
+                FeedScreen(
                     onOpenProfile = {
                         navController.navigate("profile") {
                             launchSingleTop = true
                         }
+                    },
+                    onNavigateToSpeciesDetail = { speciesId ->
+                        navController.navigate("speciesDetail/$speciesId")
                     },
                 )
             }

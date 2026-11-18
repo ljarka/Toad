@@ -17,6 +17,38 @@ data class ProfileDto(
 )
 
 /**
+ * Lightweight DTOs for the home feed join query (T-008).
+ */
+@Serializable
+data class FeedProfileDto(
+    val username: String,
+    @SerialName("avatar_url")
+    val avatarUrl: String? = null,
+)
+
+@Serializable
+data class FeedSpeciesDto(
+    @SerialName("name_pl")
+    val namePl: String? = null,
+    val edibility: String? = null,
+)
+
+@Serializable
+data class FeedPhotoDto(
+    val id: String? = null,
+    @SerialName("user_id")
+    val userId: String,
+    @SerialName("storage_path")
+    val storagePath: String,
+    val caption: String? = null,
+    @SerialName("created_at")
+    val createdAt: String? = null,
+    val location: String? = null,
+    val profiles: FeedProfileDto? = null,
+    val species: FeedSpeciesDto? = null,
+)
+
+/**
  * Postgrest DTO for `mushroom_photos` table (`0001_initial_schema.sql`).
  */
 @Serializable
