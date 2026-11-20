@@ -34,6 +34,7 @@ import com.github.ljarka.toad.ui.auth.ProfileViewModel
 import com.github.ljarka.toad.ui.auth.RegisterScreen
 import com.github.ljarka.toad.ui.feed.FeedScreen
 import com.github.ljarka.toad.ui.feed.HomeScreen
+import com.github.ljarka.toad.ui.photo.PhotoUploadScreen
 import com.github.ljarka.toad.ui.species.SpeciesDetailScreen
 import com.github.ljarka.toad.ui.species.SpeciesListScreen
 import com.github.ljarka.toad.ui.theme.ToadTheme
@@ -169,6 +170,16 @@ private fun AppNavGraph() {
                     onNavigateToSpeciesDetail = { speciesId ->
                         navController.navigate("speciesDetail/$speciesId")
                     },
+                    onAddPhoto = {
+                        navController.navigate("photoUpload") {
+                            launchSingleTop = true
+                        }
+                    },
+                )
+            }
+            composable("photoUpload") {
+                PhotoUploadScreen(
+                    onBack = { navController.popBackStack() },
                 )
             }
             composable("profile") {
