@@ -1,6 +1,6 @@
 # T-009 — Photo upload with GPS + species tag
 
-**Status:** ready  
+**Status:** done (`cbcad29`)  
 **Phase:** Etap 5  
 **Depends on:** T-005
 
