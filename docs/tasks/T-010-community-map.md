@@ -1,6 +1,6 @@
 # T-010 — Community photo map
 
-**Status:** ready  
+**Status:** done (`3a6e81f`)  
 **Phase:** Etap 5  
 **Depends on:** T-002, T-009
 

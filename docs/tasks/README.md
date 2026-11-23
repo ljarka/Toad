@@ -22,7 +22,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | [T-007](T-007-species-guide.md) | Species guide screen | `done` (`72209d9`) | Etap 3 |
 | [T-008](T-008-home-feed.md) | Home screen: season info + community feed | `done` (`89eab88`) | Etap 4 |
 | [T-009](T-009-photo-upload.md) | Photo upload with GPS + species tag | `done` (`cbcad29`) | Etap 5 |
-| [T-010](T-010-community-map.md) | Community photo map | `ready` | Etap 5 |
+| [T-010](T-010-community-map.md) | Community photo map | `done` (`3a6e81f`) | Etap 5 |
 | [T-011](T-011-probability.md) | Mushroom probability engine | `ready` | Etap 6 |
 | [T-012](T-012-probability-ui.md) | Probability display on home + map | `ready` | Etap 6 |
 | [T-013](T-013-gps-route.md) | Trip: GPS route recording | `ready` | Etap 7 |
@@ -41,7 +41,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | Etap 2 — Auth | Login, register, profile | 1/1 |
 | Etap 3 — Species | Catalog, species guide screen | 2/2 |
 | Etap 4 — Home feed | Season info, community photos | 1/1 |
-| Etap 5 — Photo sharing | Upload + GPS, community map | 1/2 |
+| Etap 5 — Photo sharing | Upload + GPS, community map | 2/2 |
 | Etap 6 — Probability | Algorithm + display | 0/2 |
 | Etap 7 — Trip | Route, car, photos, history | 0/5 |
 | Etap 8 — Release | Signing, distribution | 1/1 |
