@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -34,6 +35,7 @@ import com.github.ljarka.toad.ui.auth.ProfileViewModel
 import com.github.ljarka.toad.ui.auth.RegisterScreen
 import com.github.ljarka.toad.ui.feed.FeedScreen
 import com.github.ljarka.toad.ui.feed.HomeScreen
+import com.github.ljarka.toad.ui.map.MapScreen
 import com.github.ljarka.toad.ui.photo.PhotoUploadScreen
 import com.github.ljarka.toad.ui.species.SpeciesDetailScreen
 import com.github.ljarka.toad.ui.species.SpeciesListScreen
@@ -122,7 +124,7 @@ private fun AppNavGraph() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val showBottomBar = currentRoute == "home" || currentRoute == "speciesList"
+    val showBottomBar = currentRoute == "home" || currentRoute == "map" || currentRoute == "speciesList"
 
     Scaffold(
         bottomBar = {
@@ -136,6 +138,18 @@ private fun AppNavGraph() {
                             navController.navigate("home") {
                                 popUpTo("home") { inclusive = false }
                                 launchSingleTop = true
+                            }
+                        },
+                    )
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Default.Place, contentDescription = "Mapa") },
+                        label = { Text("Mapa") },
+                        selected = currentRoute == "map",
+                        onClick = {
+                            navController.navigate("map") {
+                                popUpTo("home") { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
                             }
                         },
                     )
@@ -176,6 +190,9 @@ private fun AppNavGraph() {
                         }
                     },
                 )
+            }
+            composable("map") {
+                MapScreen()
             }
             composable("photoUpload") {
                 PhotoUploadScreen(

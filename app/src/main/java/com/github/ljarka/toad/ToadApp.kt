@@ -6,6 +6,7 @@ import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.maplibre.android.MapLibre
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -15,6 +16,7 @@ class ToadApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MapLibre.getInstance(this)
         CoroutineScope(Dispatchers.IO).launch {
             speciesSeeder.seedIfEmpty()
         }

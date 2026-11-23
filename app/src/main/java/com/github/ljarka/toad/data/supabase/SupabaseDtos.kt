@@ -49,6 +49,26 @@ data class FeedPhotoDto(
 )
 
 /**
+ * DTO for `photos_in_bbox` RPC result (T-010).
+ */
+@Serializable
+data class MapPhotoDto(
+    val id: String,
+    val lat: Double,
+    val lon: Double,
+    @SerialName("storage_path")
+    val storagePath: String? = null,
+    val caption: String? = null,
+    @SerialName("species_id")
+    val speciesId: Int? = null,
+    @SerialName("species_name_pl")
+    val speciesNamePl: String? = null,
+    val username: String? = null,
+    @SerialName("taken_at")
+    val takenAt: String? = null,
+)
+
+/**
  * Postgrest DTO for `mushroom_photos` table (`0001_initial_schema.sql`).
  */
 @Serializable

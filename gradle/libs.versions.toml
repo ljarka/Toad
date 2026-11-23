@@ -1,6 +1,7 @@
 [versions]
 agp = "9.5.1"
 kotlin = "2.4.21"
+maplibre = "11.8.0"
 room = "2.7.2"
 coreKtx = "1.19.1"
 junit = "4.13.2"
@@ -48,6 +49,7 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
+maplibre-android = { group = "org.maplibre.gl", name = "android-sdk", version.ref = "maplibre" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
