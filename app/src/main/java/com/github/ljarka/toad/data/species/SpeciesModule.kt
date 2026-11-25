@@ -2,6 +2,7 @@ package com.github.ljarka.toad.data.species
 
 import android.content.Context
 import androidx.room.Room
+import com.github.ljarka.toad.data.weather.WeatherCacheDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,4 +22,7 @@ object SpeciesModule {
 
     @Provides
     fun provideSpeciesDao(db: AppDatabase): SpeciesDao = db.speciesDao()
+
+    @Provides
+    fun provideWeatherCacheDao(db: AppDatabase): WeatherCacheDao = db.weatherCacheDao()
 }
