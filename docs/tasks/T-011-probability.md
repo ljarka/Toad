@@ -1,6 +1,6 @@
 # T-011 — Mushroom probability engine
 
-**Status:** ready  
+**Status:** done (`8daa784`)  
 **Phase:** Etap 6  
 **Depends on:** T-003
 

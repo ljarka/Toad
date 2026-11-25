@@ -23,7 +23,7 @@ Tasks in priority order. Take the first `ready` task without an owner request.
 | [T-008](T-008-home-feed.md) | Home screen: season info + community feed | `done` (`89eab88`) | Etap 4 |
 | [T-009](T-009-photo-upload.md) | Photo upload with GPS + species tag | `done` (`cbcad29`) | Etap 5 |
 | [T-010](T-010-community-map.md) | Community photo map | `done` (`3a6e81f`) | Etap 5 |
-| [T-011](T-011-probability.md) | Mushroom probability engine | `ready` | Etap 6 |
+| [T-011](T-011-probability.md) | Mushroom probability engine | `done` (`8daa784`) | Etap 6 |
 | [T-012](T-012-probability-ui.md) | Probability display on home + map | `ready` | Etap 6 |
 | [T-013](T-013-gps-route.md) | Trip: GPS route recording | `ready` | Etap 7 |
 | [T-014](T-014-car-marker.md) | Trip: car location marker | `ready` | Etap 7 |
