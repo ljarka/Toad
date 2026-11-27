@@ -2,6 +2,8 @@ package com.github.ljarka.toad.ui.feed
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.ljarka.toad.data.probability.ProbabilityRepository
+import com.github.ljarka.toad.data.probability.ProbabilityResult
 import com.github.ljarka.toad.data.species.SpeciesDao
 import com.github.ljarka.toad.data.species.SpeciesEntity
 import com.github.ljarka.toad.data.supabase.FeedPhotoDto
@@ -25,6 +27,7 @@ data class FeedState(
     val isLoading: Boolean = false,
     val isRefreshing: Boolean = false,
     val hasMore: Boolean = true,
+    val probabilityResult: ProbabilityResult? = null,
 )
 
 @HiltViewModel
@@ -32,6 +35,7 @@ class FeedViewModel @Inject constructor(
     private val feedRepository: FeedRepository,
     private val speciesDao: SpeciesDao,
     private val supabase: SupabaseClient,
+    private val probabilityRepository: ProbabilityRepository,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(FeedState())
@@ -44,6 +48,7 @@ class FeedViewModel @Inject constructor(
         loadSeasonSpecies()
         refresh()
         subscribeToRealtime()
+        loadProbability()
     }
 
     private fun loadSeasonSpecies() {
@@ -52,6 +57,15 @@ class FeedViewModel @Inject constructor(
             speciesDao.getBySeason(month).collect { species ->
                 _state.update { it.copy(seasonSpecies = species) }
             }
+        }
+    }
+
+    private fun loadProbability() {
+        viewModelScope.launch {
+            runCatching { probabilityRepository.getProbability(52.2, 21.0) }
+                .onSuccess { result ->
+                    _state.update { it.copy(probabilityResult = result) }
+                }
         }
     }
 

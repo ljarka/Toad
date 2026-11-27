@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -13,8 +16,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -79,10 +84,20 @@ fun MapScreen(viewModel: MapViewModel = hiltViewModel()) {
 
     val mapView = remember { MapView(context) }
     var photoSource by remember { mutableStateOf<GeoJsonSource?>(null) }
+    var loadedStyle by remember { mutableStateOf<Style?>(null) }
 
     LaunchedEffect(uiState.photos, photoSource) {
         val source = photoSource ?: return@LaunchedEffect
         source.setGeoJson(buildFeatureCollection(uiState.photos))
+    }
+
+    LaunchedEffect(uiState.showHeatmap, uiState.heatmapPoints, loadedStyle) {
+        val style = loadedStyle ?: return@LaunchedEffect
+        if (uiState.showHeatmap && uiState.heatmapPoints.isNotEmpty()) {
+            updateHeatmapLayer(style, uiState.heatmapPoints)
+        } else if (!uiState.showHeatmap) {
+            removeHeatmapLayer(style)
+        }
     }
 
     DisposableEffect(lifecycleOwner) {
@@ -105,13 +120,23 @@ fun MapScreen(viewModel: MapViewModel = hiltViewModel()) {
             factory = { _ ->
                 mapView.apply {
                     getMapAsync { map ->
-                        setupMap(map, context, viewModel) { source ->
-                            photoSource = source
-                        }
+                        setupMap(map, context, viewModel,
+                            onSourceReady = { source -> photoSource = source },
+                            onStyleReady = { style -> loadedStyle = style },
+                        )
                     }
                 }
             },
             modifier = Modifier.fillMaxSize(),
+        )
+
+        FilterChip(
+            selected = uiState.showHeatmap,
+            onClick = { viewModel.toggleHeatmap() },
+            label = { Text("Pokaż prawdopodobieństwo") },
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(16.dp),
         )
     }
 
@@ -138,6 +163,7 @@ private fun setupMap(
     context: Context,
     viewModel: MapViewModel,
     onSourceReady: (GeoJsonSource) -> Unit,
+    onStyleReady: (Style) -> Unit,
 ) {
     map.setStyle(Style.Builder().fromJson(MAP_STYLE_JSON)) { style ->
         enableLocationIfGranted(map, context, style)
@@ -154,6 +180,7 @@ private fun setupMap(
         onSourceReady(source)
 
         addLayers(style)
+        onStyleReady(style)
 
         map.addOnCameraIdleListener {
             val bounds = map.projection.visibleRegion.latLngBounds

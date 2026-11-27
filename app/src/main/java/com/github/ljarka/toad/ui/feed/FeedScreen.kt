@@ -89,7 +89,7 @@ fun FeedScreen(
                     )
                 }
                 item(key = "probability") {
-                    ProbabilityCard()
+                    ProbabilityCard(result = state.probabilityResult)
                 }
                 if (state.photos.isEmpty() && !state.isRefreshing) {
                     item(key = "empty") {
