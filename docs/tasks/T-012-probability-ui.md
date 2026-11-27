@@ -1,6 +1,6 @@
 # T-012 — Probability display on home screen and map
 
-**Status:** ready  
+**Status:** done (`8a74702`)  
 **Phase:** Etap 6  
 **Depends on:** T-008, T-011
 
